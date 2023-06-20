@@ -1,0 +1,116 @@
+/*
+font-family: 'Arvo', serif; font for title
+font-family: 'Flow Circular', cursive; - font for secret/passaword
+font-family: 'Kanit', sans-serif; - font for text
+font-family: 'Tsukimi Rounded', sans-serif; - for for Japanese
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Kanit', sans-serif;
+}
+html{
+    height: 100%;
+    background-image: url('img/background-css.jpg');
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 300px;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+nav{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#logo{
+    width: 30px;
+    height: 30px;
+}
+h2{
+    margin: 20px;
+    font-family: 'Arvo', serif;
+}
+p{
+    font-family:  'Tsukimi Rounded', sans-serif;
+    font-size: small;
+}
+.inputText{
+    padding: 5px;
+    border-radius: 10px;
+    border: solid #28a9f363 2px;
+}
+#sctButton{
+    text-align: right;
+}
+.button{
+    margin: 5px;
+    padding: 3px;
+    width: 60px;
+    border-radius: 10px;
+    text-align: center;  
+}
+.button:hover{
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0px 3px 10px #00000077;
+    font-weight: bold;
+}
+#btnClean{
+    border: solid #f3b3285b 2px;
+    background-color: #f3b3285b ;
+}
+#btnSave{
+    border: solid #28f3c763 2px;
+    background-color: #28f3c763;
+}
+
+#divList{
+    font-size: medium;
+    font-family: 'Arvo', serif;
+    text-align: center;
+    margin: 15px
+}
+table{
+    text-align: center;
+    align-items: center;
+    border-collapse: collapse;
+    margin: 5px;
+}
+th{
+    font-size: small;
+    font-weight: lighter;
+    background-color: #ba69e9b6;
+    color: rgb(30, 30, 30);
+    border: solid 1px ;
+    border-color:  #ba69e9;
+    padding: 5px;
+}
+tr{
+    background-color: #f3f1dbb6;
+    padding: 5px;
+}
+tr:nth-child(even){
+    background-color: #e2c1f5b6;
+    padding: 5px;
+}
+#thCode{
+    width: 50px;
+}
+#thName{
+    width: 100px;
+}
+#thEmail{
+    width: 200px;
+}
+#thPhone{
+    width: 100px;
+}
+.thBtn{
+    width: 80px;
+}
