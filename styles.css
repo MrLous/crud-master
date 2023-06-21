@@ -69,7 +69,6 @@ p{
     border: solid #28f3c763 2px;
     background-color: #28f3c763;
 }
-
 #divList{
     font-size: medium;
     font-family: 'Arvo', serif;
@@ -113,4 +112,12 @@ tr:nth-child(even){
 }
 .thBtn{
     width: 80px;
+}
+.btnTable{
+    height: 25px;
+    padding: 5px;
+}
+.btnTable:hover{
+    cursor: pointer;
+    transform: translateY(-2px);
 }

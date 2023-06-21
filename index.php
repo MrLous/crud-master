@@ -6,6 +6,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:ital@1&family=Flow+Circular&family=Kanit:wght@200&family=Tsukimi+Rounded&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="scripts.js"></script>
  </head>
 
 <body>
@@ -14,15 +16,16 @@
         <h2>Agenda - CRUD <p>by じゅ</p></h2>
     </nav>
 
-    <form method="POST" id="crudForm">
+    <form method="POST" enctype="multipart/form-data" onSubmit="salvarForm(); return false;" id="frmCrud">
     <section id=sctDado>
+        <input id="id" type=hidden value="-1" />
         <input id="name" type=text class="inputText" required placeholder="Digite seu nome"/>
         <input id="email" type=email class="inputText" placeholder="Informe seu email"/>
         <input id="phone" type=number class="inputText" placeholder="Digite seu telefone"/>
     </section>
     <section id=sctButton>
-        <input type=reset class="button" id="btnClean" value="Limpar"/>
-        <input type=button class="button"id="btnSave" value="Salvar" onclick="salvar()"/>
+        <input type=reset class="button" id="btnClean" value="Limpar" onclick="restauraForm()"/>
+        <input type=submit class="button" id="btnSave" value="Salvar" />
     </section>
     </form>
     <section id="divList">
@@ -38,12 +41,10 @@
                 </tr>
             </thead> 
             <tbody id="tbodyContacts">      
-                </tr>         
+                <script type="text/javascript">carregarLista();</script>      
             </tbody>
         </table>
+        <h5 id="msgPHP"></h5>
     </section>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="scripts.js"></script>
-
 </body>
 </html>
