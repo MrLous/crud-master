@@ -16,13 +16,13 @@
 
     <form method="POST" id="crudForm">
     <section id=sctDado>
-        <input id="nome" type=text class="inputText" required placeholder="Digite seu nome" name="nome" />
-        <input id="email" type=email class="inputText" placeholder="Informe seu email" name="email"/>
-        <input id="telefone" type=number class="inputText" placeholder="Digite seu telefone" name="telefone"/>
+        <input id="name" type=text class="inputText" required placeholder="Digite seu nome"/>
+        <input id="email" type=email class="inputText" placeholder="Informe seu email"/>
+        <input id="phone" type=number class="inputText" placeholder="Digite seu telefone"/>
     </section>
     <section id=sctButton>
         <input type=reset class="button" id="btnClean" value="Limpar"/>
-        <input type=submit class="button"id="btnSave" value="Salvar"/>
+        <input type=button class="button"id="btnSave" value="Salvar" onclick="salvar()"/>
     </section>
     </form>
     <section id="divList">
@@ -42,21 +42,8 @@
             </tbody>
         </table>
     </section>
-    <div id="divPhp">
-        <?php
-            include("config.php");
-            switch(@$_REQUEST["action"]){
-                case "Salvar":
-                    include("crud.php");
-                break;
-                case "delete":
-                    include("crud.php");
-                break;
-                default:
-                    print "Cadastre um Contato ";
-            }
-        ?>
-    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="scripts.js"></script>
 
 </body>
 </html>

@@ -1,19 +1,18 @@
 <?php
-    switch($_REQUEST["action"]){
-        case 'Salvar':
-            $name = $_POST["nome"];
-            $email = $_POST["email"];
-            $phone = $_POST["telefone"];
+    $sql = "SELECT * FROM cliente";
 
-            $sql = "INSERT INT cliente (nome, email, telefone) VALUES ('{$name}', '{$email}','{$phone}')"; 
-            $res = $conn->query($sql);
-            break;
-        
-        case 'edit':
-            //code
-            break;
+    $res = $conn->query($sql);
 
-        case 'delete':
-            //code
-            break;
+    $rows = $res->num_rows;
+
+    if($rows > 0 ){
+        while ($row = $res->fecth_object()){
+            print $row->id;
+            print $row->nome;
+            print $row->email;
+            print $row->telefone;
+        }
+    }else{
+        print "<p>Erro</p>"
     }
+?>
