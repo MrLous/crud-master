@@ -98,17 +98,20 @@ tr:nth-child(even){
     background-color: #e2c1f5b6;
     padding: 5px;
 }
-#thCode{
+#thCod{
     width: 50px;
 }
-#thName{
+#thTask{
     width: 100px;
 }
-#thEmail{
+#thLocal{
     width: 200px;
 }
-#thPhone{
+#thTime{
     width: 100px;
+}
+#thStatus{
+     width: 50px;
 }
 .thBtn{
     width: 80px;
@@ -117,6 +120,7 @@ tr:nth-child(even){
     height: 25px;
     padding: 5px;
 }
+
 .btnTable:hover{
     cursor: pointer;
     transform: translateY(-2px);
