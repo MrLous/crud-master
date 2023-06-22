@@ -120,6 +120,14 @@ tr:nth-child(even){
     height: 25px;
     padding: 5px;
 }
+.imgTable{
+    height: 25px;
+    padding: 5px;
+    
+}
+.tdImgStatus{
+    font-size: 10px;
+}
 
 .btnTable:hover{
     cursor: pointer;

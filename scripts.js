@@ -1,11 +1,11 @@
- //Metodo que Cancelar/Limpar dados
+//Method to cancel/clear data
  function restauraForm() {
     document.getElementById('id').value = "-1";
     document.getElementById('btnSave').value = "Salvar"
 	document.getElementById('status').disabled = true;
 }
-//Metodo que carregar cadastrados
- function carregarLista() {
+// Method that loads data to table
+ function loadlist() {
 	var xmlHttp;
 	xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() {
@@ -14,83 +14,63 @@
             if(verifica == 1){
                 document.getElementById('msgPHP').innerHTML = "Pode Dormir Tranquilo";
                 document.getElementById('tbodyTask').innerHTML = "";
-				hideMsg();
             }else{
       		    document.getElementById('tbodyTask').innerHTML = this.responseText;
                 document.getElementById('msgPHP').innerHTML = "";
-            }
-    	} else {
-    		document.getElementById('msgPHP').innerHTML = "Erro na execucao do Ajax";
-    	}
+
+			}
+    	} 
   	};
   	xmlHttp.open("POST", "crud.php", true);
   	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   	xmlHttp.send("action=list");
 }
-// Metodo que carrega cliente para Alterar
-function carregarTarefa( obj ) {
+// Method that loads data selected for change
+function loadTask( obj ) {
 	document.getElementById('status').disabled = false;
 	var xmlHttp;
 	xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {
       		var resultado = JSON.parse( this.responseText );
-      		//preenche form com dados do cliente para alteracao
+      		//fill in form with data for change
       		document.getElementById('id').value 		= resultado[0].id;
       		document.getElementById('task').value 		= resultado[0].task;
       		document.getElementById('local').value 		= resultado[0].dblocal;
       		document.getElementById('time').value 	    = resultado[0].dbtime;
       		document.getElementById('status').value 	= resultado[0].dbstatus;
-      		//modifica acao do botao salvar para atualizar
+      		//modify action button 'salvar' to 'atualizar'
       		document.getElementById('btnSave').value 	 = "Atualizar";
-            document.getElementById('msgPHP').innerHTML = "";
-    	} else {
-    		document.getElementById('msgPHP').innerHTML = "Erro na execucao do Ajax";
-    	}
+    	} 
   	};
   	xmlHttp.open("POST", "crud.php", true);
   	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  	xmlHttp.send("action=buscar&id="+obj);
+  	xmlHttp.send("action=research&id="+obj);
 }
-// Metodo que exclui registro
-function excluir( obj ) {
+// Method to delete record
+function deleteTask( obj ) {
 	if ( confirm("Clique em OK para remover Tarefa.") ) {
 		var xmlHttp;
 		xmlHttp = new XMLHttpRequest();
 		xmlHttp.onreadystatechange = function() {
 	    	if (this.readyState == 4 && this.status == 200) {
-                //exibe mensagem de sucesso na tela por alguns segundos
-	      		document.getElementById('msgPHP').innerHTML = this.responseText;
-	      		document.getElementById('msgPHP').classList.remove("no-display");
-	      		hideMsg();
-	  			carregarLista();
-	    	} else {
-	    		document.getElementById('msgPHP').innerHTML = "Erro na execucao do Ajax";
-	    	}
+	      		loadlist();
+	    	} 
 	  	};
 	  	xmlHttp.open("POST", "crud.php", true);
 	  	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	  	xmlHttp.send("action=excluir&id="+obj);
+	  	xmlHttp.send("action=deleteTask&id="+obj);
   	}
 }
-// Metodo que salva/altera registro
-function salvarForm() {
+// Method that saves/changes record
+function saveForm() {
 	var xmlHttp;
 	xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {
-    		//limpa o formulario
     		restauraForm();
     		document.getElementById('frmCrud').reset();
-    		//exibe mensagem de sucesso na tela por alguns segundos
-      		document.getElementById('msgPHP').innerHTML = this.responseText;
-      		document.getElementById('msgPHP').classList.remove("no-display");
-      		document.getElementById('msgPHP').classList.add("msgPHP");
-      		hideMsg();
-  			//atualiza lista de clientes
-  			carregarLista();
-    	} else {
-    		document.getElementById('msgPHP').innerHTML = "Erro na execucao do Ajax";
+  			loadlist();
     	}
   	};
   	//recupera valores do form para enviar via ajax
@@ -101,12 +81,21 @@ function salvarForm() {
 	formData.append("dbtime", document.getElementById("time").value);
 	formData.append("dbstatus", document.getElementById("status").value)
 
-	xmlHttp.open("POST", "crud.php?action=salvar", true);
+	xmlHttp.open("POST", "crud.php?action=save", true);
 	xmlHttp.send( formData );
 }
-
-function hideMsg() {
-	setTimeout(function() {
-    	document.getElementById('msgPHP').classList.add("no-display"); 
-    }, 5000);
+//Method that changes status
+function alterarStatus(obj){
+	var xmlHttp;
+	xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	  		loadlist();
+	    }
+	};
+	var formData = new FormData();
+	formData.append("id", obj);
+	formData.append("dbstatus", document.getElementById("tdImg"+obj).textContent);
+	xmlHttp.open("POST", "crud.php?action=status", true);
+	xmlHttp.send( formData );
 }
