@@ -1,8 +1,18 @@
+
+const statusList = ["Finalizar", "Fazer", "Parar"];
+const ststusNova = ["Nova"]
+
 //Method to cancel/clear data
  function restauraForm() {
     document.getElementById('id').value = "-1";
     document.getElementById('btnSave').value = "Salvar"
-	document.getElementById('status').disabled = true;
+	const statusSelect = document.getElementById("selStatus");
+	statusSelect.options.length = 0;
+	ststusNova.forEach((status) => {
+		option = new Option(status, status.toLowerCase());
+		statusSelect.options[statusSelect.options.length] = option;
+	  });
+	statusSelect.disabled = true;
 }
 // Method that loads data to table
  function loadlist() {
@@ -27,7 +37,14 @@
 }
 // Method that loads data selected for change
 function loadTask( obj ) {
-	document.getElementById('status').disabled = false;
+	const statusSelect = document.getElementById("selStatus");
+	statusSelect.options.length = 0;
+	statusList.forEach((status) => {
+		option = new Option(status, status.toLowerCase());
+		statusSelect.options[statusSelect.options.length] = option;
+	  });
+	statusSelect.disabled = false;
+
 	var xmlHttp;
 	xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() {
@@ -38,7 +55,7 @@ function loadTask( obj ) {
       		document.getElementById('task').value 		= resultado[0].task;
       		document.getElementById('local').value 		= resultado[0].dblocal;
       		document.getElementById('time').value 	    = resultado[0].dbtime;
-      		document.getElementById('status').value 	= resultado[0].dbstatus;
+      		document.getElementById('selStatus').value 	= resultado[0].dbstatus;
       		//modify action button 'salvar' to 'atualizar'
       		document.getElementById('btnSave').value 	 = "Atualizar";
     	} 
@@ -49,6 +66,7 @@ function loadTask( obj ) {
 }
 // Method to delete record
 function deleteTask( obj ) {
+	restauraForm()
 	if ( confirm("Clique em OK para remover Tarefa.") ) {
 		var xmlHttp;
 		xmlHttp = new XMLHttpRequest();
@@ -64,6 +82,17 @@ function deleteTask( obj ) {
 }
 // Method that saves/changes record
 function saveForm() {
+	var dbstatus = document.getElementById("selStatus").value;
+	console.log(dbstatus);
+	 if(dbstatus == "fazer"){
+		dbstatus = "Fazendo";
+	}else if(dbstatus == "parar"){
+		dbstatus = "Parado";
+	}else if(dbstatus == "finalizar"){
+	   dbstatus = "Finalizada";
+	}else{
+		dbstatus = "Pendente";
+	}
 	var xmlHttp;
 	xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() {
@@ -79,13 +108,15 @@ function saveForm() {
 	formData.append("task", document.getElementById("task").value);
 	formData.append("dblocal", document.getElementById("local").value);
 	formData.append("dbtime", document.getElementById("time").value);
-	formData.append("dbstatus", document.getElementById("status").value)
+	formData.append("dbstatus",dbstatus)
 
 	xmlHttp.open("POST", "crud.php?action=save", true);
 	xmlHttp.send( formData );
+	restauraForm();
 }
 //Method that changes status
 function alterarStatus(obj){
+	restauraForm()
 	var xmlHttp;
 	xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() {

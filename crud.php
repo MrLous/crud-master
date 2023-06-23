@@ -49,7 +49,7 @@ function loadList() {
     //mount results table on the page
     while ($d = mysqli_fetch_array($res, MYSQLI_BOTH)) {
         //for completed tasks only delete option
-        if($d['dbstatus'] == "ok" ) {
+        if($d['dbstatus'] == "Finalizada" ) {
             $saida = $saida.  "  <tr>"
                 . "  <td>".$d['id']."</td>"
                 . "  <td>".$d['task']."</td>"
@@ -206,10 +206,10 @@ function changeStatus() {
     $id         = (int) $_POST["id"];
     $status     = $_POST["dbstatus"];
     // Changes Status
-    if($status == "fazendo"){
-        $status = "parado";
+    if($status == "Fazendo"){
+        $status = "Parado";
     }else{
-        $status = "fazendo";
+        $status = "Fazendo";
     }
     global $host, $user, $pass, $db;
     $mysqli = new mysqli( $host, $user, $pass, $db );

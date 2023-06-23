@@ -23,12 +23,9 @@
         <input id="id" type=hidden value="-1" name="id" />
         <input id="task" type=text class="inputText" required placeholder="Digite um Afazer" name="task"/>
         <input id="local" type=text class="inputText" placeholder="Informe local" name="dblocal"/>
-        <input id="time" type=number class="inputText" placeholder="Hrs" min="1" step="1" max="10" name="dbtime"/>
-        <select id="status" class="inputText" name="dbstatus" disabled="true">
-            <option value="pendente">Nova</option>
-            <option value="ok">Finalizada</option>
-            <option value="fazendo">Começar</option>
-            <option value="parado">Parar</option>
+        <input id="time" type=number class="inputText" placeholder="Hrs" min="1" step="1" max="10" name="dbtime" placeholder="Nova"/>
+        <select id="selStatus" class="inputText" name="selStatus" disabled="true">
+            <option>Nova</option>
         </select>
     </section>
     <section id=sctButton>
